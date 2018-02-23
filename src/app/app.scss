@@ -1,6 +1,4 @@
 // http://ionicframework.com/docs/theming/
-
-
 // App Global Sass
 // --------------------------------------------------
 // Put style rules here that you want to apply globally. These
@@ -14,3 +12,129 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+body {}
+
+.content-md {
+  color: #488aff;
+  background-color: #23334c;
+  background: -moz-linear-gradient(top, rgba(35, 51, 76, 1) 0%, rgba(22, 30, 41, 1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(35, 51, 76, 1)), color-stop(100%, rgba(22, 30, 41, 1)));
+  background: -webkit-linear-gradient(top, rgba(35, 51, 76, 1) 0%, rgba(22, 30, 41, 1) 100%);
+  background: -o-linear-gradient(top, rgba(35, 51, 76, 1) 0%, rgba(22, 30, 41, 1) 100%);
+  background: -ms-linear-gradient(top, rgba(35, 51, 76, 1) 0%, rgba(22, 30, 41, 1) 100%);
+  background: linear-gradient(to bottom, rgba(35, 51, 76, 1) 0%, rgba(22, 30, 41, 1) 100%);
+  .scroll-content {
+    top: 75px;
+    background-image: url('../assets/imgs/pattern.png');
+  }
+}
+
+.item-md.item-block .item-inner {
+  border: 0 !important;
+}
+
+ion-header {
+  ion-buttons {
+    line-height: 50px;
+    button {
+      padding: 10px !important;
+    }
+  }
+}
+
+ion-item {
+  border: 1px solid #488aff !important;
+  ;
+  background-color: #23334C !important;
+}
+
+ion-item.item-input,
+button {
+  border-radius: 30px !important;
+  height: 45px !important;
+}
+
+ion-input input {
+  padding-left: 30px !important;
+  color: #91b3ef !important;
+  font-weight: bold;
+}
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+
+.loginIcon {
+  text-align: center;
+  margin: 50px 0;
+  img {
+    width: 40%;
+  }
+}
+
+ion-list {
+  ion-list-header {
+    margin: 0 !important;
+    background-color: #1d2a3b !important;
+    ion-label {
+      font-size: 20px;
+      font-weight: bold;
+      color: #488aff;
+    }
+  }
+  ion-item {
+    background-color: #1c2b3e !important;
+    color: #417992 !important;
+    font-weight: bold !important;
+    border: 0 !important;
+  }
+  ion-item.thead {
+    color: #FFF !important;
+    font-weight: bold !important;
+  }
+}
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #576f98 !important;
+  font-weight: bold;
+}
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #576f98 !important;
+  font-weight: bold;
+}
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #576f98 !important;
+  font-weight: bold;
+}
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #576f98 !important;
+  font-weight: bold;
+}
+
+.toolbar-background-md,
+.tabs-md .tabbar {
+  background-color: #172031 !important;
+  border-color: #171e30 !important;
+}
+
+ion-tabs ion-icon {
+  color: #3c5e67 !important;
+}
+
+ion-tabs .tabbar a:nth-child(2) ion-icon {
+  padding: 20px;
+  margin: 5px 0;
+  border-radius: 50%;
+  background-color: #488aff;
+}
+
+.tabs-md .tab-button[aria-selected=true] .tab-button-icon {
+  color: #FFF !important;
+}

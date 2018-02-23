@@ -1,0 +1,18 @@
+<ion-content padding [ngClass]="skin">
+  <div class="loginIcon">
+      <img src="assets/imgs/icon.png" class="" (click)="configHost()">
+      <h1>Pagalee Scanner</h1>
+  </div>
+  <ion-list>
+
+      <ion-item class="margin-bottom-10">
+          <ion-input type="text" placeholder="Usuário" [(ngModel)]="txtLogin"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-input type="password" placeholder="Senha" [(ngModel)]="txtSenha"></ion-input>
+      </ion-item>
+
+  </ion-list>
+  <button ion-button full (click)="login()">Login</button>
+</ion-content>

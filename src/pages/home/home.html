@@ -1,17 +1,9 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<header title="Manual"></header>
+<ion-content padding [ngClass]="skin" (click)="return()">
+    <h1>{{this.title}}</h1>
+    <button ion-button (click)="readQR()" *ngIf="skin=='blue'" outline icon-only color="light">   <ion-icon name="qr-scanner"></ion-icon></button>
+    <button ion-button (click)="return()" *ngIf="skin=='green'" outline icon-only color="secondary">   <ion-icon name="thumbs-up"></ion-icon></button>
+    <button ion-button (click)="return()" *ngIf="skin=='red'" outline icon-only color="danger">   <ion-icon name="close-circle"></ion-icon></button>
+    <p *ngIf="dateUsed!=''">{{this.dateUsed}}</p>
+    <p>{{this.subtitle}}</p>
 </ion-content>

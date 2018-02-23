@@ -1,0 +1,19 @@
+<header title="Histórico"></header>
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      HISTÓRICO
+      <br>
+      <span style="font-size:14px" *ngIf="history">{{history.length}} </span>
+      <span style="font-size:10px">Tickets</span>
+
+    </ion-list-header>
+    <ion-searchbar (ionInput)="searchHistory($event)"></ion-searchbar>
+    <ion-item *ngFor="let item of history">
+      <ion-row>
+        <ion-col col-4>{{item.ticketID}}</ion-col>
+        <ion-col col-8>{{item.dataEntrada}}</ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
+</ion-content>
