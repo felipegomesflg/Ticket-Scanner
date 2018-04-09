@@ -11,10 +11,12 @@ import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 
-import {HeaderComponent} from '../components/header/header'
+import {HeaderComponent,configComponent} from '../components/header/header'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {BarcodeScanner} from '@ionic-native/barcode-scanner';
+
+import {ComumService} from './services/comum.service';
 
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -26,7 +28,8 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     TabsPage,
     LoginPage,
-    HeaderComponent
+    HeaderComponent,
+    configComponent
   ],
   imports: [
     BrowserModule,
@@ -42,13 +45,15 @@ import { IonicStorageModule } from '@ionic/storage';
     HomePage,
     TabsPage,
     LoginPage,
-    HeaderComponent
+    HeaderComponent,
+    configComponent
     
   ],
   providers: [
     StatusBar,
     SplashScreen,
     BarcodeScanner,
+    ComumService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

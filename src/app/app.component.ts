@@ -14,17 +14,18 @@ import * as myGlobals from '../app/globals'
 })
 export class MyApp {
   rootPage:any = TabsPage;
-
+  fakeSplash:boolean = true;
   constructor(
     platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     private storage: Storage,
   ) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
     });
+    setTimeout(()=>{
+        this.fakeSplash = false;
+    },4000)
     this.storage.get('PagaleeScanner').then(data=>{
       myGlobals.setServer(data);
       this.storage.get(myGlobals.storage).then(

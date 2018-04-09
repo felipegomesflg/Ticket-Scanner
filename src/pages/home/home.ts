@@ -5,6 +5,7 @@ import {NavController,AlertController,LoadingController, App} from 'ionic-angula
 import{ BarcodeScannerOptions, BarcodeScanner} from '@ionic-native/barcode-scanner';
 import { Http } from '@angular/http';
 
+import {ComumService} from '../../app/services/comum.service';
 import * as myGlobals from '../../app/globals'
 
 
@@ -27,6 +28,7 @@ export class HomePage {
     public barcode:BarcodeScanner,
     public alertCtrl:AlertController,
     public events: Events,
+    public comum:ComumService,
     private storage: Storage,
     public loadingCtrl: LoadingController,
     public http: Http) {
@@ -50,46 +52,41 @@ readQR(){
           content: 'Carregando Ticket...'
         });
         loading.present();
-        loading.dismiss();
-        this.skin="green";
-            this.title="Permitido!"
-              setTimeout(()=>{
-                this.return();
-              
-            }, 10000);
-    //     this.http.get(myGlobals.server+'/ticket/'+barcodeData.text+'/'+this.user.funcID+'/'+this.user.nome).subscribe(val=>{
-    //       loading.dismiss();
-    //        if(val['_body'] != ''){
-    //           this.title="Não Permitido!";
-    //             this.skin="red";
-    //             if(val['_body'] == '#')
-    //               this.dateUsed="Ticket Inválido";  
-    //             else
-    //               this.dateUsed="Ticket utilizado em "+moment(val['_body']).format("DD/MM/YYYY HH:mm:ss");  
-    //             setTimeout(()=>{
-    //                this.return();
+        //this.http.get(myGlobals.server+'/ticket/'+barcodeData.text+'/'+this.user.funcID+'/'+this.user.nome)
+        this.comum.sendTicket(barcodeData.text).subscribe(val=>{
+          loading.dismiss();
+           if(val['_body'] != ''){
+              this.title="Não Permitido!";
+                this.skin="red";
+                this.dateUsed="Ticket Inválido";  
+                // if(val['_body'] == '#')
+                //   this.dateUsed="Ticket Inválido";  
+                // else
+                //   this.dateUsed="Ticket utilizado em "+moment(val['_body']).format("DD/MM/YYYY HH:mm:ss");  
+                setTimeout(()=>{
+                   this.return();
                   
-    //             }, 60000);
-    //         }else{
-    //           this.skin="green";
-    //             this.title="Permitido!"
-    //              setTimeout(()=>{
-    //                this.return();
+                }, 60000);
+            }else{
+              this.skin="green";
+                this.title="Permitido!"
+                 setTimeout(()=>{
+                   this.return();
                   
-    //             }, 10000);
+                }, 10000);
               
-    //         }
+            }
               
-    //     },err=>{
-    //   loading.dismiss();
-    //   let alert = this.alertCtrl.create({
-    //         title: 'Erro!',
-    //         subTitle: err,
-    //         buttons: ['OK']
-    //       });
-    //       alert.present(); 
+        },err=>{
+      loading.dismiss();
+      let alert = this.alertCtrl.create({
+            title: 'Erro!',
+            subTitle: err,
+            buttons: ['OK']
+          });
+          alert.present(); 
           
-    // }); 
+    }); 
           this.subtitle="Toque na tela para voltar";
       }
      }, (err) => {
@@ -102,7 +99,6 @@ readQR(){
 
 
 return(){
-  console.log('ue');
   if(this.skin == 'blue')
     return false;
   this.skin ='blue';
