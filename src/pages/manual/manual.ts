@@ -3,19 +3,23 @@ import { NavController,LoadingController,AlertController, App,Events } from 'ion
 import { Storage } from '@ionic/storage';
 
 import {ComumService} from '../../app/services/comum.service';
+
 import * as myGlobals from '../../app/globals';
-import * as moment from 'moment';
+//import * as moment from 'moment';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'page-manual',
   templateUrl: 'manual.html'
 })
 export class ManualPage {
-  value:string = '6-1519416858874'
+  value:string = '74beff1e9f2c498590fca5f345702131'
   skin:string = '';
   title:string = '';
   dateUsed: any ='';
   user:any;
+  Keyboard:any;
   
   constructor(
     public navCtrl: NavController,
@@ -26,19 +30,29 @@ export class ManualPage {
     public loadingCtrl: LoadingController,
     public comum:ComumService
   ) {
-  
+    
+    
      this.storage.get(myGlobals.storage).then(data => {
         //this.user = JSON.parse(data);
       },
       error => console.error(error)
     );
   }
-
+  ngAfterViewInit()
+  {
+    
+    $('.bts.primary li').on('click',(el)=>{
+      this.press($(el.target).html());
+      
+    })
+  }
+  
   erase(){
     this.value = this.value.slice(0,-1);
     this.value = this.value;
   }
 
+  
   press(val){
     if(this.value.length>=20)
       return false;
@@ -49,7 +63,8 @@ export class ManualPage {
   go(){
     
     //console.log(moment.unix(parseFloat(this.value.split('-')[1])));
-    if(this.value.split('-').length!=2 || new Date(parseFloat(this.value.split('-')[1])).getTime() == NaN ){
+    //if(this.value.split('-').length!=2 || new Date(parseFloat(this.value.split('-')[1])).getTime() == NaN ){
+      if(this.value==''){
       let alert = this.alertCtrl.create({
         title: 'Ticket Inválido',
         subTitle: 'Número do ticket inválido',
@@ -62,41 +77,45 @@ export class ManualPage {
       content: 'Carregando Ticket...'
     });
      loading.present();
-     let ticket = this.value.split('-')[0];
-     for(var i=0;i<10-this.value.split('-')[0].length;i++){
-        ticket  = '0'+ticket;
-     }
-    ticket = '@d' + ticket + '@t' + this.value.split('-')[1];
-    this.comum.sendTicket(ticket).subscribe(val=>{
+     let ticket = this.value;
+    //  let ticket = this.value.split('-')[0];
+    //  for(var i=0;i<10-this.value.split('-')[0].length;i++){
+    //     ticket  = '0'+ticket;
+    //  }
+    // ticket = '@d' + ticket + '@t' + this.value.split('-')[1];
+    this.comum.sendTicket(ticket).subscribe(async val=>{
       loading.dismiss();
-      if(val['_body'] != ''){
-        this.title="Não Permitido!";
-          this.skin="red";
-          this.dateUsed="Ticket Inválido";  
-          // if(val['_body'] == '#')
-          //   this.dateUsed="Ticket Inválido";  
-          // else
-          //   this.dateUsed="Ticket utilizado em "+moment(val['_body']).format("DD/MM/YYYY HH:mm:ss");  
-          setTimeout(()=>{
-                  this.return(); 
-                }, 60000);
-      }else{
+      var result = JSON.parse(val['_body']);
+      console.log(result);
+      this.dateUsed=result.result;  
+      if(result.success){
         this.skin="green";
           this.title="Permitido!"
-         setTimeout(()=>{
-            this.return();
-          }, 10000);
-        
-      }
-         
-    },err=>{
+      }else{
+        this.title="Não Permitido!";
+          this.skin="red";
+          
+        }  
+        setTimeout(()=>{
+          this.return();
+        }, 6000);
+      },err=>{
       loading.dismiss();
-      let alert = this.alertCtrl.create({
+      if(err.status = status){
+        let alert = this.alertCtrl.create({
+          title: 'Sessão Encerrada!',
+          subTitle: 'Sua sessão foi encerrada, favor efetuar novamente o Login',
+          buttons: ['OK']
+        });
+        alert.present(); 
+      }else{
+        let alert = this.alertCtrl.create({
             title: 'Erro!',
             subTitle: err,
             buttons: ['OK']
           });
           alert.present(); 
+        }
           
     });
   }

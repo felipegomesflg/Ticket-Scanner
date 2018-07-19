@@ -1,7 +1,7 @@
 <ion-tabs selectedIndex="1">
   
-  <ion-tab [root]="manualRoot" tabIcon="md-grid"></ion-tab>
-  <ion-tab [root]="homeRoot" tabIcon="qr-scanner"></ion-tab>
-  <ion-tab [root]="historyRoot" tabIcon="time" tabBadge="14" tabBadgeStyle="warning"></ion-tab>
+  <ion-tab [root]="manualRoot" tabIcon="md-grid" (ionSelect)="landscape()"></ion-tab>
+  <ion-tab [root]="homeRoot" tabIcon="qr-scanner" (ionSelect)="portrait()"></ion-tab>
+  <ion-tab [root]="historyRoot" tabIcon="time" tabBadge="14" tabBadgeStyle="warning" (ionSelect)="portrait()"></ion-tab>
 </ion-tabs>
 

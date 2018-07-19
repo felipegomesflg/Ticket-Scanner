@@ -30,7 +30,7 @@ export class LoginPage {
   public comum:ComumService) {
   }
   private loginData:any = {
-    unique_identifier:'01001448960',
+    unique_identifier:'00000000001',
     pin_code:'123456'
   };
   
@@ -59,6 +59,14 @@ export class LoginPage {
             this.createCookie(JSON.parse(val['_body']).result);  
           }
           
+        },error=>{
+          loading.dismiss();
+          let alert = this.alertCtrl.create({
+            title: 'Erro!',
+            subTitle: "CPF ou Pin Code inválido(s)",
+            buttons: ['OK']
+          });
+          alert.present(); 
         });
           
         

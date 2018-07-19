@@ -15,6 +15,7 @@ import {HeaderComponent,configComponent} from '../components/header/header'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {BarcodeScanner} from '@ionic-native/barcode-scanner';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import {ComumService} from './services/comum.service';
 
@@ -54,6 +55,7 @@ import { IonicStorageModule } from '@ionic/storage';
     SplashScreen,
     BarcodeScanner,
     ComumService,
+    ScreenOrientation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

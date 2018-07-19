@@ -32,6 +32,7 @@ export class HomePage {
     private storage: Storage,
     public loadingCtrl: LoadingController,
     public http: Http) {
+      
       this.storage.get(myGlobals.storage).then(data => {
         // this.user = JSON.parse(data);
         // console.log(this.user);
@@ -40,7 +41,6 @@ export class HomePage {
     );
   }
 
-  
 readQR(){
   
   // //let uid = "-KirQyj3zGtrPful-K1s";
@@ -65,18 +65,14 @@ readQR(){
                 //   this.dateUsed="Ticket utilizado em "+moment(val['_body']).format("DD/MM/YYYY HH:mm:ss");  
                 setTimeout(()=>{
                    this.return();
-                  
                 }, 60000);
             }else{
               this.skin="green";
                 this.title="Permitido!"
                  setTimeout(()=>{
                    this.return();
-                  
-                }, 10000);
-              
+                }, 10000); 
             }
-              
         },err=>{
       loading.dismiss();
       let alert = this.alertCtrl.create({
